@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: raceroom-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: raceroom
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: raceroom
+  template:
+    metadata:
+      labels:
+        app: raceroom
+    spec:
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+      terminationGracePeriodSeconds: 60
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        runAsNonRoot: true
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+        - name: raceroom
+          tty: true
+          image: ghcr.io/procinger/r3e-oci:4bd69c4
+          env:
+            - name: UPDATE_ON_START
+              value: 'true'
+          ports:
+            - name: admin
+              containerPort: 8080
+              protocol: TCP
+            - name: game-udp
+              containerPort: 60000
+              protocol: UDP
+            - name: game-tcp
+              containerPort: 60001
+              protocol: TCP
+            - name: game-udp2
+              containerPort: 60002
+              protocol: UDP
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+          resources:
+            requests:
+              cpu: '1'
+              memory: 1Gi
+            limits:
+              memory: 4Gi
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: raceroom-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: raceroom-admin
+spec:
+  selector:
+    app: raceroom
+  ports:
+    - name: admin
+      port: 8088
+      targetPort: admin

@@ -1,0 +1,27 @@
+services:
+  raceroom:
+    # Replace the tag with the commit SHA you want to deploy.
+    image: ghcr.io/procinger/r3e-oci:4bd69c4
+    platform: linux/amd64
+    tty: true
+    restart: unless-stopped
+    stop_grace_period: 60s
+    environment:
+      UPDATE_ON_START: "true"
+    ports:
+      # Keep administration accessible only from the Docker host.
+      - "127.0.0.1:8088:8080/tcp"
+      # Game ports for the first race server instance.
+      - "60000:60000/udp"
+      - "60001:60001/tcp"
+      - "60002:60002/udp"
+    volumes:
+      - raceroom-data:/data
+    mem_limit: 4g
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
+volumes:
+  raceroom-data:
