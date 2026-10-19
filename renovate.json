@@ -2,5 +2,58 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "automerge": true,
+  "automergeType": "pr",
+  "platformAutomerge": false,
+  "rebaseWhen": "auto",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update GE-Proton release archives (verified by SHA-512 during the build).",
+      "managerFilePatterns": [
+        "/(^|/)Dockerfile$/"
+      ],
+      "matchStrings": [
+        "ARG PROTON_VERSION=(?<currentValue>GE-Proton\\d+-\\d+)"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "GloriousEggroll/proton-ge-custom",
+      "versioningTemplate": "regex:^GE-Proton(?<major>\\d+)-(?<minor>\\d+)$"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)Dockerfile$/"
+      ],
+      "matchStrings": [
+        "ARG WINETRICKS_VERSION=(?<currentValue>\\d{8})\\s+ARG WINETRICKS_REVISION=(?<currentDigest>[a-f0-9]{40})"
+      ],
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "Winetricks/winetricks",
+      "versioningTemplate": "loose"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Pin the Ubuntu base image and Dockerfile frontend to immutable digests.",
+      "matchManagers": [
+        "dockerfile"
+      ],
+      "matchDatasources": [
+        "docker"
+      ],
+      "pinDigests": true
+    },
+    {
+      "matchDatasources": [
+        "github-tags"
+      ],
+      "matchPackageNames": [
+        "Winetricks/winetricks"
+      ],
+      "allowedVersions": "/^\\d{8}$/",
+      "pinDigests": true
+    }
   ]
 }
