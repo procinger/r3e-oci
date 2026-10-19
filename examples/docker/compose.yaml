@@ -1,6 +1,6 @@
 services:
   raceroom:
-    image: ghcr.io/procinger/r3e-oci:d8222b7
+    image: ghcr.io/procinger/r3e-oci:v0.1.1
     platform: linux/amd64
     tty: true
     restart: unless-stopped
