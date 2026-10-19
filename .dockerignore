@@ -2,3 +2,4 @@
 .idea
 .code
 data
+examples/docker/.env
