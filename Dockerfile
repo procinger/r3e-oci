@@ -2,7 +2,7 @@
 FROM ubuntu:26.04@sha256:c098726dd9b9733f3e885f8de0ef375206a311b0a317eadc40d347b1115fb944
 
 ARG TARGETARCH
-ARG PROTON_VERSION=GE-Proton11-9
+ARG PROTON_VERSION=GE-Proton11-10
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
