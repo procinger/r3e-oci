@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/procinger/r3e-oci/compare/v0.1.1...v0.1.2) (2026-10-19)
+
+
+### Documentation
+
+* adjust container hosting docs ([b986ad1](https://github.com/procinger/r3e-oci/commit/b986ad124f0699d79e3f91334dd90e220c9521e0))
+
 ## [0.1.1](https://github.com/procinger/r3e-oci/compare/v0.1.0...v0.1.1) (2026-10-19)
 
 
