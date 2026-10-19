@@ -1,13 +1,14 @@
 services:
   raceroom:
-    # Replace the tag with the commit SHA you want to deploy.
-    image: ghcr.io/procinger/r3e-oci:4bd69c4
+    image: ghcr.io/procinger/r3e-oci:d8222b7
     platform: linux/amd64
     tty: true
     restart: unless-stopped
     stop_grace_period: 60s
     environment:
       UPDATE_ON_START: "true"
+      ADMIN_USERNAME: ${ADMIN_USERNAME:?Set ADMIN_USERNAME}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Set ADMIN_PASSWORD}
     ports:
       # Keep administration accessible only from the Docker host.
       - "127.0.0.1:8088:8080/tcp"

@@ -11,6 +11,7 @@ A built-in Nginx proxy exposes the web administration interface.
 docker build --platform linux/amd64 -t raceroom:latest .
 docker volume create raceroom-data
 docker run --rm -t --name raceroom \
+  -e ADMIN_USERNAME=admin -e ADMIN_PASSWORD=admin \
   -p 127.0.0.1:8088:8080 \
   -p 60000:60000/udp -p 60001:60001/tcp -p 60002:60002/udp \
   -v raceroom-data:/data raceroom:latest
@@ -28,3 +29,7 @@ The [examples](examples/) directory contains configurations for Docker and Kuber
 - [Kubernetes with a LoadBalancer](examples/k8s/r3e-loadbalancer.yaml)
 - [Kubernetes with host networking](examples/k8s/r3e-host-network.yaml)
 
+
+Basic Auth is enabled when both `ADMIN_USERNAME` and `ADMIN_PASSWORD` are set.
+If neither is set, authentication is disabled; incomplete or empty credentials
+prevent startup.
