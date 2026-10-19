@@ -113,6 +113,44 @@ check_terminal() {
     fi
 }
 
+configure_admin_auth() {
+    local password_file=/tmp/raceroom-admin.htpasswd
+    local config_file=/tmp/raceroom-admin-auth.conf
+    local password_hash temporary_file
+
+    if [[ ! -v ADMIN_USERNAME && ! -v ADMIN_PASSWORD ]]; then
+        echo 'auth_basic off;' > "$config_file"
+        rm -f "$password_file"
+        return 0
+    fi
+
+    if [[ -z "${ADMIN_USERNAME:-}" || -z "${ADMIN_PASSWORD:-}" ]]; then
+        echo 'Set both ADMIN_USERNAME and ADMIN_PASSWORD to nonempty values.' >&2
+        return 1
+    fi
+
+    if [[ ! "$ADMIN_USERNAME" =~ ^[a-zA-Z0-9_.@-]+$ ]]; then
+        echo 'ADMIN_USERNAME may contain only letters, digits, _, ., @ and -.' >&2
+        return 1
+    fi
+
+    if [[ "$ADMIN_PASSWORD" == *$'\n'* || "$ADMIN_PASSWORD" == *$'\r'* ]]; then
+        echo 'ADMIN_PASSWORD must not contain line breaks.' >&2
+        return 1
+    fi
+
+    # Keep the plaintext password out of command-line arguments and files.
+    password_hash=$(printf '%s' "$ADMIN_PASSWORD" | openssl passwd -6 -stdin)
+    temporary_file=$(mktemp /tmp/raceroom-admin.htpasswd.XXXXXX)
+    printf '%s:%s\n' "$ADMIN_USERNAME" "$password_hash" > "$temporary_file"
+    mv -f "$temporary_file" "$password_file"
+
+    cat > "$config_file" <<'AUTH_CONFIG'
+auth_basic "RaceRoom administration";
+auth_basic_user_file /tmp/raceroom-admin.htpasswd;
+AUTH_CONFIG
+}
+
 start_server() {
     cd "$SERVER_DIR"
     echo "Starting $SERVER_EXE with Proton Wine and native .NET; prefix: $WINEPREFIX"
@@ -129,6 +167,7 @@ main() {
     check_terminal
     prepare_machine_id
     prepare_directories
+    configure_admin_auth
     update_server_if_enabled
     check_server_executable
     link_steam_libraries
