@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/procinger/r3e-oci/compare/v0.1.2...v0.1.3) (2026-10-19)
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency gloriouseggroll/proton-ge-custom to ge-proton11-10 ([c78680e](https://github.com/procinger/r3e-oci/commit/c78680e10cc0dc4b460f69cf082bdf8767f888e9))
+
 ## [0.1.2](https://github.com/procinger/r3e-oci/compare/v0.1.1...v0.1.2) (2026-10-19)
 
 
