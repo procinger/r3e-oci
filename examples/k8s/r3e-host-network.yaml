@@ -1,4 +1,14 @@
 apiVersion: v1
+kind: Secret
+metadata:
+  name: raceroom-admin-auth
+type: Opaque
+stringData:
+  ADMIN_USERNAME: admin
+  # Set a nonempty password before applying this example.
+  ADMIN_PASSWORD: ""
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: raceroom-data
@@ -37,10 +47,20 @@ spec:
       containers:
         - name: raceroom
           tty: true
-          image: ghcr.io/procinger/r3e-oci:4bd69c4
+          image: ghcr.io/procinger/r3e-oci:d8222b7
           env:
             - name: UPDATE_ON_START
               value: 'true'
+            - name: ADMIN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: raceroom-admin-auth
+                  key: ADMIN_USERNAME
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: raceroom-admin-auth
+                  key: ADMIN_PASSWORD
           ports:
             - name: admin
               containerPort: 8080
