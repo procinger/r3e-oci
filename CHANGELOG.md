@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.4](https://github.com/procinger/r3e-oci/compare/v0.1.3...v0.1.4) (2026-10-21)
+
+
+### Bug Fixes
+
+* patch incomplete wine http api ([de7d7ee](https://github.com/procinger/r3e-oci/commit/de7d7ee697431e34db30ee71b4dfc099d61f7500))
+
+
+### Documentation
+
+* bump oci tag ([845d20a](https://github.com/procinger/r3e-oci/commit/845d20a6e7d40a34cdcf28c16d0972040396f55c))
+
+
+### Miscellaneous Chores
+
+* **deps:** update dependency gloriouseggroll/proton-ge-custom to ge-proton11-11 ([1b18779](https://github.com/procinger/r3e-oci/commit/1b18779fa31f8aae2604f8ccd6f4589f390bea0b))
+
 ## [0.1.3](https://github.com/procinger/r3e-oci/compare/v0.1.2...v0.1.3) (2026-10-19)
 
 
