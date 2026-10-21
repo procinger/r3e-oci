@@ -47,7 +47,7 @@ spec:
       containers:
         - name: raceroom
           tty: true
-          image: ghcr.io/procinger/r3e-oci:v0.1.1
+          image: ghcr.io/procinger/r3e-oci:v0.1.4
           env:
             - name: UPDATE_ON_START
               value: 'true'
