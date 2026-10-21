@@ -1,0 +1,10 @@
+# Build the patched runtime directly from the main multi-stage Dockerfile.
+services:
+  raceroom:
+    image: raceroom:httpapi-patched
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+      target: runtime
+    environment:
+      WINEDEBUG: "-all,+seh,+http"
