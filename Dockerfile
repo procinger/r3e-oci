@@ -137,7 +137,7 @@ COPY --chmod=755 patches/wine/run-httpapi-tests.sh /opt/httpapi-tests/run
 # Use a fresh prefix as an unprivileged user, without installing .NET.
 RUN set -eu \
     && useradd --uid 1001 --create-home --shell /bin/bash httpapi-test \
-    && python3 -c 'import uuid; print(uuid.uuid4().hex)' > /etc/machine-id \
+    && python3 -c 'import uuid; print(uuid.uuid4().hex)' > /etc/machine-id
 
 USER 1001:1001
 
