@@ -4,7 +4,7 @@ ARG PROTON_VERSION=GE-Proton11-11
 ARG WINE_REVISION=c53678ab22a85f0fad3588dd34f0452a463bd015
 
 ###### wine-build
-FROM ubuntu:26.04@sha256:19fcd1bf268f02b60aca3bd30bd8a6d9a11759a430e32921833e65f16d87348a AS wine-build
+FROM ubuntu:26.04@sha256:0e73b71479e7bc5f006bca872e25c3cd680dc052a0116f90d63ae363537db0dd AS wine-build
 
 ARG WINE_REVISION
 ARG PROTON_VERSION
@@ -76,7 +76,7 @@ RUN set -eu \
     && printf '%s\n' "$WINE_REVISION" > /out/wine-revision
 
 ###### proton-runtime
-FROM ubuntu:26.04@sha256:19fcd1bf268f02b60aca3bd30bd8a6d9a11759a430e32921833e65f16d87348a AS proton-runtime
+FROM ubuntu:26.04@sha256:0e73b71479e7bc5f006bca872e25c3cd680dc052a0116f90d63ae363537db0dd AS proton-runtime
 
 ARG TARGETARCH
 ARG PROTON_VERSION
