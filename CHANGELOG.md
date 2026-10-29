@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.5](https://github.com/procinger/r3e-oci/compare/v0.1.4...v0.1.5) (2026-10-29)
+
+
+### Bug Fixes
+
+* delete empty continuation line ([ad75ecc](https://github.com/procinger/r3e-oci/commit/ad75ecc72ed5dc3378d8e6978feda867106ace63))
+
+
+### Miscellaneous Chores
+
+* **deps:** update ubuntu:26.04 docker digest to 0e73b71 ([4e0a872](https://github.com/procinger/r3e-oci/commit/4e0a8727de05bd40a9e7af8aebd373242928ccac))
+* **deps:** update ubuntu:26.04 docker digest to 19fcd1b ([ff4077d](https://github.com/procinger/r3e-oci/commit/ff4077d2643f78ea74f0ce86861e9b754dec2490))
+* **deps:** update ubuntu:26.04 docker digest to 6a06111 ([f750d43](https://github.com/procinger/r3e-oci/commit/f750d43907f266263c5f5c8a9d7a38ec82cdb235))
+
 ## [0.1.4](https://github.com/procinger/r3e-oci/compare/v0.1.3...v0.1.4) (2026-10-21)
 
 
