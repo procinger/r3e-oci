@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/procinger/r3e-oci/compare/v0.1.5...v0.1.6) (2026-11-21)
+
+
+### Miscellaneous Chores
+
+* **deps:** update docker/dockerfile:1 docker digest to 572cebb ([a1ec7f9](https://github.com/procinger/r3e-oci/commit/a1ec7f9b3d4619b2d00a410c222abb29f214449d))
+
 ## [0.1.5](https://github.com/procinger/r3e-oci/compare/v0.1.4...v0.1.5) (2026-11-19)
 
 
