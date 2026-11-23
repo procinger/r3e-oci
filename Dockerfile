@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1@sha256:572cebbc2b15e6f84c077742952674889cb63cd5e9b80abdffcbe587b6f19183
 # Keep the Proton release and its Wine submodule revision in sync.
-ARG PROTON_VERSION=GE-Proton11-11
+ARG PROTON_VERSION=GE-Proton11-14
 ARG WINE_REVISION=c53678ab22a85f0fad3588dd34f0452a463bd015
 
 ###### wine-build
